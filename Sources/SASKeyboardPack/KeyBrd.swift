@@ -9,31 +9,29 @@
 import UIKit
 import SASLogger
 
-class KeyBrd {
+public class KeyBrd {
     
-    var increasedInset_Height: CGFloat = 120
+    public var increasedInset_Height: CGFloat = 120
     
-    func regKBNotific(_ scrollView: UIScrollView, _ inset_Height: CGFloat){
+    public init() {}
+    
+    public func regKBNotific(_ scrollView: UIScrollView, _ inset_Height: CGFloat){
         
         increasedInset_Height = inset_Height
         
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { (notification) in
-        
                 self.keyBrdWasShown_V2(notification as NSNotification, scrollView)
-            
-     
+
         }
         
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { (notification) in
-            
                 self.keyBrdWillBeHidden_V2(notification as NSNotification, scrollView)
-            
         }
         
     }
     
     
-    private func keyBrdWasShown_V2(_ notification: NSNotification,_ scrollView: UIScrollView) {
+    public func keyBrdWasShown_V2(_ notification: NSNotification,_ scrollView: UIScrollView) {
         
         let info: NSDictionary = notification.userInfo! as NSDictionary
         guard let keyBrd = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size else {return}
@@ -42,7 +40,7 @@ class KeyBrd {
         
     }
     
-    private func keyBrdWillBeHidden_V2(_ notification: NSNotification, _ scrollView: UIScrollView ) {
+    public func keyBrdWillBeHidden_V2(_ notification: NSNotification, _ scrollView: UIScrollView ) {
         
         let info: NSDictionary = notification.userInfo! as NSDictionary
         guard let keyBrd = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size else {return}
@@ -51,7 +49,7 @@ class KeyBrd {
         
     }
     
-    func deregisterKBNotific(){
+    public func deregisterKBNotific(){
         
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)

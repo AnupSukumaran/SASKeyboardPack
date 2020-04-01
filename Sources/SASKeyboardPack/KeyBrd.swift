@@ -17,6 +17,12 @@ public class KeyBrd {
     
     public func regKBNotific(_ scrollView: UIScrollView, _ inset_Height: CGFloat){
         
+        let systemVersion = UIDevice.current.systemVersion
+
+        if (Double(systemVersion) ?? 0.0) <= 11.0 {
+            scrollView.contentInset = UIEdgeInsets(top: -64.0, left: 0.0, bottom: 0.0, right: 0.0)
+        }
+        
         increasedInset_Height = inset_Height
         
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { (notification) in

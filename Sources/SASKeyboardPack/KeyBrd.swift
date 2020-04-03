@@ -15,13 +15,16 @@ public class KeyBrd {
     
     public init() {}
     
-    public func regKBNotific(_ scrollView: UIScrollView, _ inset_Height: CGFloat){
-        
+    public func scrollAdjustment(_ scrollView: UIScrollView, top: CGFloat) {
         let systemVersion = UIDevice.current.systemVersion
 
         if (Double(systemVersion) ?? 0.0) <= 11.0 {
-            scrollView.contentInset = UIEdgeInsets(top: -64.0, left: 0.0, bottom: 0.0, right: 0.0)
+            scrollView.contentInset = UIEdgeInsets(top: top, left: 0.0, bottom: 0.0, right: 0.0)
         }
+        
+    }
+    
+    public func regKBNotific(_ scrollView: UIScrollView, _ inset_Height: CGFloat){
         
         increasedInset_Height = inset_Height
         

@@ -54,7 +54,7 @@ public class KeyBrd {
         let info: NSDictionary = notification.userInfo! as NSDictionary
         guard let keyBrd = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size else {return}
         scrollView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: -keyBrd.height, right: 0.0)
-         scrollView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        scrollView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         
     }
     

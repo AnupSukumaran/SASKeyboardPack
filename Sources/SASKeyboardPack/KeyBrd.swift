@@ -17,8 +17,10 @@ public class KeyBrd {
     
     public func scrollAdjustment(_ scrollView: UIScrollView, top: CGFloat) {
         let systemVersion = UIDevice.current.systemVersion
-
-        if (Double(systemVersion) ?? 0.0) <= 11.0 {
+        Logger.p("systemVersion = \(systemVersion)")
+        Logger.p("DoublesystemVersion = \(Double(systemVersion) ?? 0.0)")
+        
+        if systemVersion.compare("11.0", options: .numeric) == .orderedAscending {
             scrollView.contentInset = UIEdgeInsets(top: top, left: 0.0, bottom: 0.0, right: 0.0)
         }
         

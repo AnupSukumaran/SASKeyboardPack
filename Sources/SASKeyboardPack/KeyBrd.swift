@@ -21,6 +21,7 @@ public class KeyBrd {
         Logger.p("DoublesystemVersion = \(Double(systemVersion) ?? 0.0)")
         
         if systemVersion.compare("11.0", options: .numeric) == .orderedAscending {
+            //For below ios 11 like ios 10 and such...
             scrollView.contentInset = UIEdgeInsets(top: top, left: 0.0, bottom: 0.0, right: 0.0)
         }
         
@@ -75,7 +76,17 @@ extension KeyBrd {
     //MARK:
     public func adjustTextViewWithKeyBrd(_ textView: UITextView, _ scrollView: UIScrollView, _ viewToAdjust: UIView) {
         var contentOffset: CGPoint = scrollView.contentOffset
-        contentOffset.y = textView.frame.height + 20
+        let systemVersion = UIDevice.current.systemVersion
+        if systemVersion.compare("11.0", options: .numeric) == .orderedAscending {
+           contentOffset.y = textView.frame.height + 20 + (KeyBrd.keyBrdSize?.height ?? 0.0)
+        } else {
+            contentOffset.y = textView.frame.height + 20
+        }
+        
+        
         scrollView.setContentOffset(contentOffset, animated: true)
+        
+       
+        
     }
 }

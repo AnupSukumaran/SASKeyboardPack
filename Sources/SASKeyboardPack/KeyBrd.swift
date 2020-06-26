@@ -12,7 +12,7 @@ import SASLogger
 public class KeyBrd {
     
     public var increasedInset_Height: CGFloat = 120
-    
+    public static var keyBrdSize: CGSize?
     public init() {}
     
     public func scrollAdjustment(_ scrollView: UIScrollView, top: CGFloat) {
@@ -46,7 +46,7 @@ public class KeyBrd {
         
         let info: NSDictionary = notification.userInfo! as NSDictionary
         guard let keyBrd = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size else {return}
-        Logger.p("###@@@ keyBrd!.height = \(keyBrd.height)")
+        KeyBrd.keyBrdSize = keyBrd
         scrollView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyBrd.height + increasedInset_Height, right: 0.0)
         
     }
@@ -55,6 +55,7 @@ public class KeyBrd {
         
         let info: NSDictionary = notification.userInfo! as NSDictionary
         guard let keyBrd = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size else {return}
+        KeyBrd.keyBrdSize = keyBrd
         scrollView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: -keyBrd.height, right: 0.0)
         scrollView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         
@@ -68,4 +69,13 @@ public class KeyBrd {
     }
  
     
+}
+
+extension KeyBrd {
+    //MARK:
+    public func adjustTextViewWithKeyBrd(_ textView: UITextView, _ scrollView: UIScrollView, _ viewToAdjust: UIView) {
+        var contentOffset: CGPoint = scrollView.contentOffset
+        contentOffset.y = textView.frame.height + 20
+        scrollView.setContentOffset(contentOffset, animated: true)
+    }
 }
